@@ -1,0 +1,106 @@
+什么是redis？
+redis是一个非关系型的缓存框架，以key-value的形式存储数据，数据存储在内存中
+
+redis怎么安装？
+在官方网站下载redis zip文件，解压即可
+
+redis服务怎么启动？
+cmd进入redis根目录 输入redis-server.exe redis.windows.conf
+
+redis客户端怎么启动？
+cmd进入redis根目录 输入redis-cli.exe
+
+redis基本操作
+help 命令 获取命令的帮助信息 语法、起源版本、和所属的组
+clear 清屏
+flushall 清除数据
+quit exit 退出客户端
+
+redis key 命名规范
+表名：主键名：主键值：字段名
+
+redis数据类型
+1.String
+set key value 设置数据
+get key 获取数据
+mset key value key value 批量设置
+mget key key 批量获取
+del key 删除数据（所有的数据类型都用这个删除）
+incr key 自增+1
+decr key 自减-1
+incrby key num 增加num
+incrbyfloat key num 小数的加减
+decrby key num 减少num
+strlen key 获取数据长度
+append key value 追加数据，如果没有则新建
+setex key 秒 value 给数据设置生命周期 单位为秒
+psetex key 毫秒 value 单位为毫秒
+
+2.hash
+hset key field value 例如：hset user id 1
+hget key field 获取字段值
+hdel key field 删除字段
+hmset key field value field value 批量设置数据
+hmget key field field 批量获取数据，只有value，没有field
+hgetall key 获取所有的数据 格式：field value
+hincrby key field num 对字段进行自增num
+hlen key 获取hash长度
+hkeys key 获取所有的字段名
+hvals key 获取所有的value
+
+hash购物车实例
+以用户id为key，其中有两个field ，field1为商品数量 商品id:num value，
+field2为商品信息 商品id:info {用json形式存储商品信息}
+
+3.list
+lpush key value[] 从左边添加数据
+rpush key value[] 从右边添加数据
+lrange key start stop 从start 开始，stop结束取数据
+lindex key index 获取index位置的数据
+llen key 获取list长度
+lpop key 从左边获取数据并移除
+rpop key 从右边获取数据并移除
+blpop key[] time 从左边获取数据并移除，如果没有会等待time单位为秒，直到key中有数据，或等待时间结束
+brpop key[] time 同理
+lrem key count value 从key中的左边删除count个 value
+
+list实例：日志，浏览记录，历史记录等
+
+4.set
+sadd key member 添加数据 
+smembers key 查看所有数据
+srem key member 删除数据
+scard key 获取set长度
+sismember key member key中是否有member
+srandmember key count 从set中随机获取count个数据
+spop key count 从set中随机获取count个数据并移除
+sinter key1 key2 求交集（两个集合中都有的数据）
+sunion key1 key2 求并集（两个集合中所有数据，不重复显示）
+sdiff key1 key2 求差集（key2中没有的key1 的数据，反过来同理）
+sinterstore destination key1 key2 把交集存储在destination中
+sunionstore destination key1 key2 把并集存储在destination中
+sdiffstore destination key1 key2 把差集存储在destination中
+smove source destination member 把source 中的meber 移动到destination中
+
+set实例：权限设置（求并集），访问统计（uv，ip的过滤效果）
+
+5.sorted_set
+zadd key score member 添加数据，根据score排序
+zrange key start stop withscores 查看数据由大到小，withscores会查看score
+zrevrange key start stop withscores 由小到大
+zrem key member 删除数据
+zrangebyscore key min max limit 根据score min到max一个范围查询，limit 可以分页
+zrevrangebyscore key min max limit 由大到小
+zremrangebyrank key start stop 根据索引范围删除数据
+zremrangebyscore key min max 根据score范围删除数据
+zcard key 查询sroted_set长度
+zcount key min max 获取符合范围的数据数量
+zinterstore destination numkeys key【key。。。】numkeys 代表几个sorted_set，
+求其中的交集，并默认求和赋给destination 可以 aggregate sum，min，max
+差集，并集同理
+zrank key member 获取member的索引，由小到大
+zrevrank key member 由大到小
+zscore key member 获取member  的 score值
+zincrby key increment member 对memeber+increment
+
+sortted_set实例：排行榜top10，
