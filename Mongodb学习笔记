@@ -1,0 +1,11 @@
+什么是mongodb？
+MongoDB是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的
+
+怎么连接mongodb？
+在linux中安装mongodb，并启动，在windows系统中使用图形化工具进行连接
+
+mongodb基本指令
+show dbs 查看持久化的数据库，有
+use [数据库名称] switch database 如果没有则新建
+db.dropDataBase() 删除当前数据库
+show collections 查看数据库中的
