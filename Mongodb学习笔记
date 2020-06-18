@@ -8,4 +8,10 @@ mongodb基本指令
 show dbs 查看持久化的数据库，有
 use [数据库名称] switch database 如果没有则新建
 db.dropDataBase() 删除当前数据库
-show collections 查看数据库中的
+show collections 查看数据库中的集合（表）
+db.createCollection(name) 创建集合
+db.集合.drop 删除集合
+db.集合.insert{json数据} 插入单个文档
+db.集合.insert
+
+
