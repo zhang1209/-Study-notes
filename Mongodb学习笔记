@@ -1,17 +1,21 @@
 什么是mongodb？
-MongoDB是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的
+MongoDB是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的非关系型数据库
 
 怎么连接mongodb？
 在linux中安装mongodb，并启动，在windows系统中使用图形化工具进行连接
 
 mongodb基本指令
-show dbs 查看持久化的数据库，有
+show dbs 查看持久化的数据库
 use [数据库名称] switch database 如果没有则新建
 db.dropDataBase() 删除当前数据库
 show collections 查看数据库中的集合（表）
 db.createCollection(name) 创建集合
 db.集合.drop 删除集合
-db.集合.insert{json数据} 插入单个文档
-db.集合.insert
+db.集合.insert（{字段：值，字段：值}） 插入单个文档
+db.集合.insertMany（[{字段：值},{字段:值}]）插入多个文档，可以使用trycatch捕获异常
+db.集合.find({字段：值}) 查询
+db.集合.find({},{字段:1}) 只查询某些字段
+
+
 
 
