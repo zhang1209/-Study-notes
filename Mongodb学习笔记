@@ -13,9 +13,15 @@ db.createCollection(name) 创建集合
 db.集合.drop 删除集合
 db.集合.insert（{字段：值，字段：值}） 插入单个文档
 db.集合.insertMany（[{字段：值},{字段:值}]）插入多个文档，可以使用trycatch捕获异常
-db.集合.find({字段：值}) 查询
-db.集合.find({},{字段:1}) 只查询某些字段
-
-
-
+db.集合.save({}) 如果不指定_id就和insert 相同，如果指定则是更新该数据
+db.集合.update({query}，{$set:{字段：修改后的值}},upsert,muliti,writeConcern) 更新操作，query是update的查询条件，类似sql中的where；upsert的意
+思是如果没有查询到符合条件的，是否创建新的记录，默认false；muliti意思是是否修改所有查询到的数据，默认只修改第一条，writeConcern抛出异常级别
+db.集合.remove({query},justOne,writeConcern) 删除操作，query意思是删除条件，justOne当为true或1 时只删除符合条件的第一条，
+writeConcern抛出异常级别
+db.集合.remove({}) 删除所有
+db.集合.find(query).pretty() 查询操作，query是条件，pretty会把查询出的数据格式化
+query中可以传递多个条件({条件1,条件2}) 类似于where中的and，（{$or:[{},{}]}）类似于where中的or
+这两个也可以联合使用（{条件，$or:[{条件},{条件}]}）
+$gt 大于 $lt 小于 $gte 大于等于 $lte 小于等于 例如： db.集合.find({age:{$gt:20}}) 查询集合中age大于20的数据
+$type 指定字段是什么类型的查询 例如：db.集合.find({title:{$type:2}}) 查询集合中title为string类型的数据
 
