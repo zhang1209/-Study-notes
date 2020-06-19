@@ -17,7 +17,6 @@ db.集合.save({}) 如果不指定_id就和insert 相同，如果指定则是更
 db.集合.update({query}，{$set:{字段：修改后的值}},upsert,muliti,writeConcern) 更新操作，query是update的查询条件，类似sql中的where；upsert的意
 思是如果没有查询到符合条件的，是否创建新的记录，默认false；muliti意思是是否修改所有查询到的数据，默认只修改第一条，writeConcern抛出异常级别
 db.集合.remove({query},justOne,writeConcern) 删除操作，query意思是删除条件，justOne当为true或1 时只删除符合条件的第一条，
-writeConcern抛出异常级别
 db.集合.remove({}) 删除所有
 db.集合.find(query).pretty() 查询操作，query是条件，pretty会把查询出的数据格式化
 query中可以传递多个条件({条件1,条件2}) 类似于where中的and，（{$or:[{},{}]}）类似于where中的or
